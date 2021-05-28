@@ -1,0 +1,320 @@
+#Project done by Jayanth Sivaraju
+#CoviInfo - A special program to provide information about COVID-19 and helpline.
+
+import csv
+"""
+Functions used in this code -
+display() - To display user specific choices to know about various aspects of Covid19.
+
+user_input() - Used to verify the choice entered by the user.
+
+Health_info(),General_health_info,covid_state(),about_tests() 
+used to provide information of health and vitals affected by Covid19.
+
+symptoms_display(),covid_symptoms() - To display symptoms of Covid virus.
+
+covid_precautions() - Displays necessary precautions to be followed.
+
+covid_treatment() - Provides information about medicines for mild,moderate symptoms.
+
+ambulance_number() - Provides specific country's helpline number.
+"""
+#In this Code , User gives input and gets the required information about Covid19
+
+#General Health Record and Symptoms of Covid (Declared as Global Variables)
+
+common_symptoms = ['fever','cough','fatigue','headache']
+
+other_symptoms = ['shortness of breath','loss of smell or taste','body aches and pains',
+                  'sore throat','runny or stuffy nose','digestive symptoms', 
+                  'including nausea, vomiting, or diarrhea']
+
+BP = {'Low BP':'systolic: 90 mm Hg or lower || diastolic: 60 mm Hg or lower',
+      'Normal BP':'systolic: 91-120 mm Hg || diastolic: 61-80 mm Hg',
+      'At Risk':'systolic: 121-139 mm Hg || diastolic: 81-89 mm Hg',
+      'High BP':'systolic: 140 mm Hg or higher || diastolic: 90 mm Hg or higher',}
+
+Oxygen_level = {'Low Oxygen Level':'less than 75 mm Hg',
+                'Normal':'75-100 mm Hg',
+                'Good':'100-120 mm Hg',
+                'Higher Oxygen Level':'greater that 120 mm Hg'}
+
+Pulse = {'Standard':'72bpm','Normal':'60-80 bpm','High':'90-120 bpm'}
+
+Temperature = {'Normal':'92.0F-98.6F','Noraml Fever':'99.0F-100.0F',
+               'High Fever':'101.0F-103.0F','Very High Fever':'greater than 103.0F'}
+
+
+def main():
+    display()
+    #Displays a prompt message
+    #Asks user to select an option
+
+def display():
+    print('')
+    print("1.To know about Health Information ")
+    print("2.To know about Covid Symptoms")
+    print("3.To know about Covid Precautions")
+    print("4.To know about Covid Treatment")
+    print("5.To know your country's helpline and ambulance number")
+    print("6. Exit")
+    print('')
+    n = input("Enter Your Choice :")
+    print('')
+    user_input(n)
+
+def user_input(n):
+    #Verifies the User input and displays the required information
+    if n == '1':
+        Health_info()
+    elif n == '2':
+        symptoms_display()
+    elif n == '3':
+        covid_precautions()
+    elif n == '4':
+        covid_treatment()
+    elif n == '5':
+        ambulance_number()
+    elif n == '6':
+        print("Stay Home!")
+        print("Stay Safe!")
+    else:
+        print("Invalid Input")
+        print("Select a Valid option")
+        print('')
+        display()
+
+def Health_info():
+    print("1.To know about general health information")
+    print("2.To know about Covid tests")
+    print("3.Return to MainMenu")
+    print('')
+    a = input("Enter Your Choice :")
+
+    if a == '1' :
+        general_health_info()
+    elif a == '2':
+        covid_state()
+    elif a == '3':
+        display()
+    else :
+        print('')
+        print("Invalid Input!")
+        print("Select a Valid Option")
+        print('')
+        Health_info()
+
+def general_health_info():
+    print('')
+    print("The following are the vitals affected by Corona Virus:")
+    print('')
+
+    print("Blood Pressure :")
+    for key,val in BP.items():
+        print(key,'=>',val)
+    print('')
+
+    print("Oxygen Level :")
+    for key,val in Oxygen_level.items():
+        print(key,'=>',val)
+    print('')
+
+    print("Pulse :")
+    for key,val in Pulse.items():
+        print(key,'=>',val)
+    print('')
+
+    print("Temperature :")
+    for key,val in Temperature.items():
+        print(key,'=>',val)
+
+    print('')
+    display()
+
+def covid_state():
+    print('')
+    print("Types of Covid Tests:")
+    tests = {'1.':'Molecular Test','2.':'Antigen Test','3.':'Antibody (Serology) Test'}
+    for key,val in tests.items():
+        print(key,val)
+    about_tests()
+
+def about_tests():
+    print('')
+    print("To know about Molecular tests , Enter 1")
+    print("To know about Antigen tests , Enter 2")
+    print("To know about Antibody (Serology) tests , Enter 3")
+    print("To return to mainmenu , Enter 4")
+    print('')
+    test = input("Enter your choice:")
+
+    if test == '1':
+        molecular_test()
+    elif test == '2':
+        antigen_test()
+    elif test == '3':
+        serology_test()
+    elif test == '4':
+        display()
+    else :
+        print("Invalid Input")
+        print("Select a valid option")
+        about_tests()
+
+def molecular_test():
+    print('')
+    print("Molecular tests look for the virus’s genetic material") 
+    print("These tests are current standard for diagnosing COVID-19.")
+    methods = ['Nasal swab','Throat swab']
+    print('')
+    print("Methods used for tests: ",methods)
+    print('')
+    display()
+
+def antigen_test():
+    print('')
+    print("Antigen rapid tests are inexpensive, efficient, and fast.")
+    print("These rapid tests detect certain proteins on the surface or in the virus.")
+    print("They can be used to make a clinical diagnosis in symptomatic patients in the first five days of symptoms.")
+    methods = ['Nasal swab','Throat swab']
+    print('')
+    print("Methods used for tests: ",methods)
+    print('')
+    display()
+
+def serology_test():
+    print('')
+    print("Antibody tests detect antibodies that signal that the body has mounted an immune response to the virus.")
+    methods = ['Blood sample']
+    print('')
+    print("Methods used fo tests: ",methods)
+    print('')
+    display()
+
+def symptoms_display():
+    print("1.Mild illness Symptoms")
+    print("2.Moderate illness Symptoms")
+    print("3.Severe illness Symptoms")
+    print("4.Return to mainmenu")
+    print('')
+    num = input('Enter Your Choice: ')
+    print('')
+    covid_symptoms(num)
+
+
+def covid_symptoms(num):
+    # Provides the required information about Covid Symptoms
+    mild_illness = ['shortness of breath','difficulty breathing']
+
+    moderate_illness = ['lower respiratory illness(ex:pneumonia)',
+                        'Blood oxygen levels remain at 94 percent or higher']
+
+    severe_illness = ['blood oxygen levels that are less than 94%',
+                      'high breathing rate','severe lung disease']
+
+    all_symptoms = common_symptoms + other_symptoms
+
+    if num == '1':
+        print("The common mild symptoms of Covid19 :")
+        print(common_symptoms)
+        print('')
+        print("A person with mild illness does not have: ")
+        print(mild_illness)
+    elif num == '2':
+        print("Major symptoms of moderate illness: ")
+        print(moderate_illness)
+        print('')
+        print("All typical Symptoms(based on Covid records) :")
+        print(all_symptoms)
+    elif num == '3':
+        print("Severe illness Symptoms: ")
+        print(severe_illness)
+        print('')
+        print("All typical Symptoms (based on Covid records) :")
+        print(all_symptoms)
+    elif num == '4':
+        display()
+    else :
+        print("Invalid Input")
+        print("Select a Valid option")
+        print('')
+        symptoms_display()
+
+    print('')
+    print("Note: The Symptoms are based on the major COVID symptom reports")
+    print('')
+    display()
+
+def covid_precautions():
+    print('')
+    print("Precautions :")
+    precautions = {1 : 'Wear a mask',
+                   2 : 'Stay 6 feet apart from others',
+                   3 : 'Get a Covid19 vaccine when it is available to you',
+                   4 : 'Avoid crowds',
+                   5 : 'Wash your hands often',
+                   6 : 'Use sanitizers'}
+    for key,val in precautions.items():
+        print(key,'=>',val)
+    print('')
+    display()
+
+def covid_treatment():
+    print("[The following Medicines are for MILD Symptoms]")
+    print("{For MODERATE and SEVERE Symptoms consult an authorised doctor}")
+
+    symptoms = {'Sore throat or cough':' Harney and Sons Organic Peppermint Tea',
+            'Nasal congestion, cough, or body aches':'Dayquil',
+            'Aches,pains and fever':'Advil',
+            'Dehydration':'Pedialyte'}
+    print('')
+    for item in symptoms:
+              print("{}: {}".format(item,symptoms[item]))
+              print('')
+
+    print('')
+    print("Note: These medicines are referred from Google")
+    print("Consult an authorised doctor for best remedies")
+    display()
+
+def ambulance_number():
+    print('')
+    continent = ['Africa','America','Antarctica','Asia','Europe','Oceania']
+    for item in continent:
+        print(item)
+    print('')
+    n = input("Choose a continent(or press Enter for mainmenu): ")
+    if n == '':
+        display()
+    else:
+        num(n)
+
+def num(n):
+    country={}
+    if (n=='Africa')or(n=='America')or(n=='Antarctica')or(n=='Asia')or(n=='Europe')or(n=='Oceania'):
+        with open(n+".csv") as f:
+            for line in f:
+                (key,val) = line.split(",")
+                country[key] = val
+        name = input("Enter country name(or press Enter for mainmenu):")
+        print('')
+        if name == '':
+            display()
+        else:
+            if name in country:
+                print("Country: {} ; Helpline and Ambulance service: {}".format(name,country[name]))
+                display()
+            else:
+                print("Note:")
+                print("1.Enter country name that is in the selected continent.")
+                print("3.All country names are case sensitive(Ex:usa is not same as USA)")
+                num(n)
+    else :
+        print('')
+        print("Note:")
+        print("Enter a valid continent name")
+        print("All continent names are case sensitive")
+        ambulance_number()
+
+if __name__ == '__main__':
+    main()
